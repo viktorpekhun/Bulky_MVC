@@ -4,12 +4,13 @@ using Bulky.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace BulkyWeb.Controllers
+namespace BulkyWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public CategoryController(IUnitOfWork unitOfWork) 
+        public CategoryController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -46,17 +47,17 @@ namespace BulkyWeb.Controllers
                 TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index");
             }
-            
+
             return View();
         }
 
         public IActionResult Edit(int? id)
         {
-            if(id == null || id == 0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
-            Category? categoryFromDb = _unitOfWork.Category.GetFirstOrDefault(u=>u.Id==id);
+            Category? categoryFromDb = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
             if (categoryFromDb == null)
             {
                 return NotFound();
