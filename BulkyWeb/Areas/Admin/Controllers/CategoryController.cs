@@ -110,7 +110,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public IActionResult EditPOST(int? id)
+        public IActionResult DeletePOST(int? id)
         {
             Category? obj = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
             if (obj == null)
